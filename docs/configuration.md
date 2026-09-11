@@ -77,7 +77,7 @@ Point it at the directory holding your RDF, not at your home directory.
 |---|---|---|
 | `JENA_READ_ONLY` | `--read-only` | `false` |
 
-When on, the six writing tools — `sparql_update`, `write_graph`, `drop_graph`,
+When on, the seven writing tools — `sparql_update`, `write_graph`, `drop_graph`,
 `load_rdf_file`, `create_dataset`, `delete_dataset`, `compact_dataset` — are not
 listed at all, and are refused before any request leaves if called anyway.
 

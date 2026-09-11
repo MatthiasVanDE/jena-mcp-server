@@ -1,0 +1,47 @@
+# Publishes to npm when a version tag is pushed.
+#
+#   npm version patch|minor|major   # bumps package.json and makes the tag
+#   git push --follow-tags
+#
+# Needs one secret in the repository: NPM_TOKEN, an npm automation token.
+# Settings -> Secrets and variables -> Actions -> New repository secret.
+#
+# An automation token is the right kind here: it skips the one-time password,
+# which a workflow cannot answer.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write        # lets npm record provenance for the release
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
+
+      - run: npm ci
+      # prepublishOnly runs build and tests, but do it here too so a failure
+      # stops the job before anything is uploaded.
+      - run: npm run check
+
+      - name: Check the tag matches package.json
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg="$(node -p "require('./package.json').version")"
+          if [ "$tag" != "$pkg" ]; then
+            echo "Tag $tag does not match package.json version $pkg" >&2
+            exit 1
+          fi
+
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

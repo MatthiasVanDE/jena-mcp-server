@@ -98,7 +98,7 @@ graphs of any size.
 
 ## Let a model explore but not change anything
 
-Run with `JENA_READ_ONLY=true`. The six writing tools are not listed, so they are
+Run with `JENA_READ_ONLY=true`. The seven writing tools are not listed, so they are
 not attempted. Reading, describing, statistics and backup all still work.
 
 Useful when pointing a model at production data, and generally the right default

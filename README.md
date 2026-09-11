@@ -110,8 +110,8 @@ you set it they refuse to run. That is deliberate: a tool that "loads a file int
 the triplestore" is, unfenced, a tool that can ship any readable file on the
 machine to a remote server.
 
-**`JENA_READ_ONLY=true`** hides the six writing tools rather than refusing them
-on call. A model does not attempt what it is not offered.
+**`JENA_READ_ONLY=true`** hides the seven writing tools rather than refusing
+them on call. A model does not attempt what it is not offered.
 
 Everything else: [docs/configuration.md](docs/configuration.md).
 
