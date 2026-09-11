@@ -1,0 +1,30 @@
+{
+  "name": "jena-mcp-server",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for Apache Jena Fuseki: SPARQL, the Graph Store Protocol, and dataset administration.",
+  "type": "module",
+  "bin": { "jena-mcp-server": "dist/index.js" },
+  "main": "dist/index.js",
+  "engines": { "node": ">=20" },
+  "files": ["dist", "docs", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "node --test test/*.test.js",
+    "check": "npm run build && npm test",
+    "prepublishOnly": "npm run check"
+  },
+  "keywords": ["mcp", "model-context-protocol", "apache-jena", "fuseki", "sparql", "rdf", "triplestore", "knowledge-graph"],
+  "author": "Matthias Vanderelst",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/MatthiasVanDE/jena-mcp-server.git" },
+  "bugs": { "url": "https://github.com/MatthiasVanDE/jena-mcp-server/issues" },
+  "homepage": "https://github.com/MatthiasVanDE/jena-mcp-server#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}
